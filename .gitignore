@@ -1,0 +1,7 @@
+*.avi
+*.mp4
+*.webm
+node_modules/* /node_modules
+node_modules
+*.tgz
+*.sh

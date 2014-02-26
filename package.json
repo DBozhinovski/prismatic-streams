@@ -1,0 +1,19 @@
+{
+	"author": "Darko Bozhinovski <dbozhinovski@gmail.com>",
+	"name": "prismatic",
+	"version": "0.5.1",
+	"description": "A node.js stream-based wrapper for FFMPEG",
+	"main": "./dist/libprismatic.js",
+	"bin": {
+		"prismatic": "./bin/prismatic"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@gitlab.medialab.io:db/prism.git"
+	},
+	"dependencies": {
+		"lodash": "*",
+		"commander": "*"
+	}
+
+}
