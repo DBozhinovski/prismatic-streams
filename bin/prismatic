@@ -4,7 +4,7 @@
 ## Created for testing purposes, use ffmpeg directly if you need a CLI interpreter for transcoding!
 
 program = require "commander"
-{Porcelain, Formatter} = require "../dist/libprismatic"
+{Plumbing, Formatter} = require "../dist/libprismatic"
 
 ## expose to CLI
 program
@@ -19,16 +19,16 @@ program
 
 switch program.do
   when 'meta'
-    Porcelain.info program.input, (out) -> console.log JSON.parse(out)
+    Plumbing.info program.input, (out) -> console.log JSON.parse(out)
   when 'run'
-    Porcelain.info program.input, (out) ->
+    Plumbing.info program.input, (out) ->
       meta = JSON.parse(out)
-      Porcelain.run("-i #{program.input} -acodec #{program.audio_codec} 
+      Plumbing.run("-i #{program.input} -acodec #{program.audio_codec} 
       -vcodec #{program.video_codec} #{program.output}")
       .pipe(Formatter.toJSON())
       .pipe(Formatter.percents(meta.streams[0].nb_frames))
       .pipe process.stdout
   when 'thumbnail', 'th'
-    Porcelain.run("-i #{program.input} -ss #{program.time} -s #{program.resolution} -vframes 1 -an #{program.output}")
+    Plumbing.run("-i #{program.input} -ss #{program.time} -s #{program.resolution} -vframes 1 -an #{program.output}")
   else
     console.log "Unknown command. Type -h / --help for a list of commands."

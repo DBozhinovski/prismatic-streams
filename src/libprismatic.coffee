@@ -1,4 +1,4 @@
 module.exports = {
-  Porcelain: require "./porcelain"
+  Plumbing: require "./plumbing"
   Formatter: require "./formatter"
 }
