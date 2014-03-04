@@ -36,4 +36,4 @@ class Plumbing extends EventEmitter
         next stdout
 
 
-module.exports = new Plumbing
+module.exports = Plumbing
