@@ -11,8 +11,9 @@ class Plumbing
       if error then throw error.toString().trim()
       else if stderr then throw stderr.toString().trim()
       else
-        fs.writeFile 'dummy.sh', "ffmpeg #{options.join ' '}", (error) ->
+        fs.writeFile 'dummy.sh', "ffmpeg #{options.join ' '}", (error) =>
           ff = spawn "sh", ["dummy.sh"]
+          @pid = ff.pid
 
           # since ffmpeg has the nasty habit of printing to stderr...
           ff.stderr.on "data", (out) -> rs.push out
