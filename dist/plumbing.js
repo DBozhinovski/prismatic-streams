@@ -69,6 +69,6 @@
 
   })(EventEmitter);
 
-  module.exports = new Plumbing;
+  module.exports = Plumbing;
 
 }).call(this);
