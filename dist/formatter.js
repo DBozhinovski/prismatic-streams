@@ -29,9 +29,9 @@
         "size": progress.size || 0,
         "time": (function() {
           var time, _ref;
-          time = ((_ref = progress.time) != null ? _ref.toString().split(":") : void 0) || "00:00:00";
+          time = ((_ref = progress.time) != null ? _ref.toString().split(":") : void 0) || "0";
           return parseInt(time[0], 10) * 60 * 60 + parseInt(time[1], 10) * 60 + parseInt(time[2], 10);
-        })() || "00:00:00",
+        })() || "0",
         "bitrate": progress.bitrate || 0
       };
     };
@@ -56,7 +56,7 @@
   };
 
   module.exports.getProgress = function(current, target) {
-    if (this.previous && this.previous > parseInt(current || 0, 10)) {
+    if (this.previous && this.previous > parseInt(current || 0, 10) && this.previous <= 100) {
       return this.previous;
     } else {
       this.previous = parseInt(current || 0, 10);

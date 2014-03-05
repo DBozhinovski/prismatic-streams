@@ -15,9 +15,9 @@ module.exports.toJSON = (options) ->
       "q": progress.q or 0
       "size": progress.size or 0
       "time": ( -> 
-        time = progress.time?.toString().split(":") or "00:00:00"
+        time = progress.time?.toString().split(":") or "0"
         parseInt(time[0],10) * 60 * 60 + parseInt(time[1], 10) * 60 + parseInt(time[2], 10)
-      )() or "00:00:00"
+      )() or "0"
       "bitrate": progress.bitrate or 0
     }
 
@@ -41,7 +41,7 @@ module.exports.toJSON = (options) ->
   ts
 
 module.exports.getProgress = (current, target) ->
-  if @previous and @previous > parseInt(current or 0, 10)
+  if @previous and @previous > parseInt(current or 0, 10) and @previous <= 100
     return @previous
   else
     @previous = parseInt(current or 0, 10)
