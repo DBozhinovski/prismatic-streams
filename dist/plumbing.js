@@ -49,7 +49,7 @@
               return rs.push(out);
             });
             return ff.stdout.on("close", function() {
-              return exec("rm " + _this.fname.sh, function() {
+              return fs.unlink("" + _this.fname.sh, function() {
                 rs.push(null);
                 return _this.emit("closed");
               });

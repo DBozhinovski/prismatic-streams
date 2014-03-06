@@ -26,7 +26,7 @@ class Plumbing extends EventEmitter
           ff.stderr.on "data", (out) => rs.push out
 
           ff.stdout.on "close", => 
-            fs.unlink "rm #{@fname.sh}", =>
+            fs.unlink "#{@fname.sh}", =>
               rs.push null # stream done
               @emit "closed"
 
