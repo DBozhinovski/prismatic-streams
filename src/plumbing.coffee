@@ -18,13 +18,13 @@ class Plumbing extends EventEmitter
       else if stderr then @emit "error", error.toString().trim()
       else
         @fname = uuid.v4()
-        fs.writeFile "./#{@fname}.sh", "ffmpeg #{options.join ' '}", (error) =>
-          ff = spawn "sh", ["./#{@fname}.sh"]
+        console.log process.cwd()
+        fs.writeFile "#{@fname}.sh", "ffmpeg #{options.join ' '}", (error) =>
+          ff = spawn "sh", ["#{@fname}.sh"]
           @emit "started", ff.pid # return the pid
 
           setTimeout  =>
-            console.log @fname
-            fs.unlink "./#{@fname.sh}", (error) =>
+            fs.unlink "#{@fname}.sh", (error) =>
               @emit "error", error.toString().trim() if error # remove the temp file
           , 1000
 
