@@ -22,13 +22,14 @@ class Plumbing extends EventEmitter
           ff = spawn "sh", ["#{@fname}.sh"]
           @emit "started", ff.pid # return the pid
 
+          fs.unlink "#{@fname.sh}" # remove the temp file
+
           # since ffmpeg has the nasty habit of printing to stderr...
           ff.stderr.on "data", (out) => rs.push out
 
           ff.stdout.on "close", => 
-            fs.unlink "#{@fname.sh}", =>
-              rs.push null # stream done
-              @emit "closed"
+            rs.push null # stream done
+            @emit "closed"
 
     rs
 
