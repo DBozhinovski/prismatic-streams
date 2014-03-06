@@ -45,14 +45,16 @@
             var ff;
             ff = spawn("sh", ["" + _this.fname + ".sh"]);
             _this.emit("started", ff.pid);
+            setTimeout(function() {
+              console.log(_this.fname);
+              return fs.unlink("" + _this.fname.sh);
+            }, 1000);
             ff.stderr.on("data", function(out) {
               return rs.push(out);
             });
             return ff.stdout.on("close", function() {
-              return fs.unlink("" + _this.fname.sh, function() {
-                rs.push(null);
-                return _this.emit("closed");
-              });
+              rs.push(null);
+              return _this.emit("closed");
             });
           });
         }

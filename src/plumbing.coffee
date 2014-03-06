@@ -22,7 +22,10 @@ class Plumbing extends EventEmitter
           ff = spawn "sh", ["#{@fname}.sh"]
           @emit "started", ff.pid # return the pid
 
-          fs.unlink "#{@fname.sh}" # remove the temp file
+          setTimeout  =>
+            console.log @fname
+            fs.unlink "#{@fname.sh}" # remove the temp file
+          , 1000
 
           # since ffmpeg has the nasty habit of printing to stderr...
           ff.stderr.on "data", (out) => rs.push out
