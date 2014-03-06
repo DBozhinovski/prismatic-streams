@@ -41,13 +41,17 @@
           return _this.emit("error", error.toString().trim());
         } else {
           _this.fname = uuid.v4();
-          return fs.writeFile("" + _this.fname + ".sh", "ffmpeg " + (options.join(' ')), function(error) {
+          return fs.writeFile("./" + _this.fname + ".sh", "ffmpeg " + (options.join(' ')), function(error) {
             var ff;
-            ff = spawn("sh", ["" + _this.fname + ".sh"]);
+            ff = spawn("sh", ["./" + _this.fname + ".sh"]);
             _this.emit("started", ff.pid);
             setTimeout(function() {
               console.log(_this.fname);
-              return fs.unlink("" + _this.fname.sh);
+              return fs.unlink("./" + _this.fname.sh, function(error) {
+                if (error) {
+                  return _this.emit("error", error.toString().trim());
+                }
+              });
             }, 1000);
             ff.stderr.on("data", function(out) {
               return rs.push(out);
