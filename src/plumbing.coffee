@@ -3,6 +3,7 @@ fs = require "fs"
 { Readable } = require "stream"
 { EventEmitter } = require 'events'
 Formatter = require './formatter'
+uuid = require 'node-uuid'
 
 class Plumbing extends EventEmitter
   run: (raw) =>
@@ -16,16 +17,18 @@ class Plumbing extends EventEmitter
       if error then @emit "error", error.toString().trim()
       else if stderr then @emit "error", error.toString().trim()
       else
-        fs.writeFile 'dummy.sh', "ffmpeg #{options.join ' '}", (error) =>
-          ff = spawn "sh", ["dummy.sh"]
+        @fname = uuid.v4()
+        fs.writeFile "#{@fname}.sh", "ffmpeg #{options.join ' '}", (error) =>
+          ff = spawn "sh", ["#{@fname}.sh"]
           @emit "started", ff.pid # return the pid
 
           # since ffmpeg has the nasty habit of printing to stderr...
           ff.stderr.on "data", (out) => rs.push out
 
           ff.stdout.on "close", => 
-            rs.push null # stream done
-            @emit "closed"
+            exec "rm #{@fname.sh}", ->
+              rs.push null # stream done
+              @emit "closed"
 
     rs
 

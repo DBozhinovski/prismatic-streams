@@ -1,7 +1,7 @@
 {
 	"author": "Darko Bozhinovski <dbozhinovski@gmail.com>",
 	"name": "prismatic-streams",
-	"version": "0.5.9",
+	"version": "0.6.0",
 	"description": "A node.js stream-based wrapper for FFMPEG",
 	"main": "./dist/libprismatic.js",
 	"bin": {
@@ -13,7 +13,8 @@
 	},
 	"dependencies": {
 		"lodash": "*",
-		"commander": "*"
+		"commander": "*",
+		"node-uuid": "*"
 	}
 
 }
