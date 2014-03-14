@@ -44,6 +44,9 @@
           console.log(process.cwd());
           return fs.writeFile("" + _this.fname + ".sh", "ffmpeg " + (options.join(' ')), function(error) {
             var ff;
+            if (error) {
+              _this.emit("error", error);
+            }
             ff = spawn("sh", ["" + _this.fname + ".sh"]);
             _this.emit("started", ff.pid);
             setTimeout(function() {

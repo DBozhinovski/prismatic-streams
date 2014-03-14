@@ -18,6 +18,8 @@ program
   .option('-t, --time [time]', 'Time', '120')
   .parse process.argv
 
+plumbing.once 'started', (pid) -> console.log pid
+
 switch program.do
   when 'meta'
     plumbing.info program.input, (out) -> console.log JSON.parse(out)

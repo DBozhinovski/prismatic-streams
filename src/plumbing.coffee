@@ -20,6 +20,7 @@ class Plumbing extends EventEmitter
         @fname = uuid.v4()
         console.log process.cwd()
         fs.writeFile "#{@fname}.sh", "ffmpeg #{options.join ' '}", (error) =>
+          @emit "error", error if error
           ff = spawn "sh", ["#{@fname}.sh"]
           @emit "started", ff.pid # return the pid
 
